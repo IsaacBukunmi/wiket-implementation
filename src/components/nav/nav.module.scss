@@ -1,0 +1,101 @@
+@import '../../styles/global.scss';
+
+._{
+  nav{
+    position: fixed;
+    top:0;
+    left:0;
+    z-index:99;
+    background: transparent;
+    width:100%;
+    padding:15px 0; 
+    transition:800ms;
+    .nav_container{
+      @extend %container;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .logo{
+        img{
+          @media (max-width:$break-point-s) {
+            width:100px;
+          }
+        }
+      }
+      .menu_container{
+        display: flex;
+        align-items: center;
+        ul.menu_list{
+          list-style-type: none;
+          display: flex;
+          @media (max-width:$break-point-l) {
+            display:none;
+          }
+          li{
+            padding-right:50px;
+            transition: 800ms;
+            @media (max-width:$break-point-xl) {
+              padding-right:20px;
+            }
+            font-size:17px;
+            color:$green;
+            font-weight: 700;
+            cursor:pointer;
+          }
+        }
+        button.get_started{
+          background-color:$orange;
+          border:none;
+          width: 141px;
+          height: 45px;
+          color:$beige;
+          font-size: 16px;
+          border-radius:8px;
+          cursor:pointer;
+           @media (max-width:$break-point-s) {
+            width:120px;
+          }
+        }
+        .hamburger_menu{
+          height:21px;
+          width:33px;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          cursor: pointer;
+          margin-left:15px;
+          display:none;
+          @media (max-width:$break-point-l) {
+            display:block;
+          }
+          span{
+              width:100%;
+              height:3px;
+              background-color:$green;
+              position: absolute;
+              border-radius:4px;
+              &:nth-child(1){
+                  top:0px;
+                  right:0;
+                  width:80%;
+              }
+  
+  
+              &:nth-child(2){
+                  top:10px;
+                  right:0;
+                  width:100%;
+              }
+  
+              &:nth-child(3){
+                  top:20px;
+                  right:0;
+                  width:65%;
+              }
+          }
+        }
+      }
+    }
+  }
+}

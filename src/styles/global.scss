@@ -1,0 +1,38 @@
+
+
+@font-face {
+  font-family: 'Faible';
+  src: local('Faible'), url('../assets/fonts/Faible/Faible-Regular.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SpoofTrial';
+  src: local('SpoofTrial'), url('../assets/fonts/SpoofTrial/SpoofTrial-Regular.otf') format('truetype');
+}
+
+/* === Variables === **/
+$font-primary: 'SpoofTrial';
+
+$break-point-xs: 420px;
+$break-point-s: 576px;
+$break-point-md: 782px;
+$break-point-l: 992px;
+$break-point-xl: 1024px;
+$break-point-xxl: 1200px;
+
+/* ===================
+== Color Variables ===
+**/
+
+/* General Colors*/
+$green:#004E4C;
+$orange:#FAA834;
+$beige:#FFF8EF;
+
+%container {
+    padding:0 70px;
+ 
+    @media(max-width:$break-point-s) {
+        padding:0 20px;
+    }
+}

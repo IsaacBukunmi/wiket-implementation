@@ -1,0 +1,31 @@
+@import './styles/global.scss';
+
+@font-face {
+  font-family: 'Faible';
+  src: local('Faible'), url('../assets/fonts/Faible/Faible-Regular.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SpoofTrial';
+  src: local('SpoofTrial'), url('./assets/fonts/SpoofTrial/SpoofTrial-Regular.otf') format('truetype');
+}
+
+
+*{
+    box-sizing: border-box;
+}
+
+
+
+body{
+    font-family: $font-primary;
+    background: $beige;
+    height:100%;
+    width:100%;
+    padding:0;
+    margin:0;
+}
+
+h1, h2, h3, h4, h5, p{
+    margin:0;
+}
