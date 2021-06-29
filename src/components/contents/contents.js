@@ -16,13 +16,13 @@ const ContainerVariants = {
 };
 
 const floristVariants = {
-  initial: { y: 50, opacity:0 },
+  initial: { y: 80, opacity:0 },
   animate: { y: 0, opacity:1,
     transition: {
       type: "tween",
-      ease: 'easeOut',
+      ease: 'easeIn',
       stiffness: 800,
-      duration: 2,
+      duration: .8,
       delay: .5,
     }
   },
@@ -88,7 +88,7 @@ const subHeroTextAndIconsVariants = {
       type: "tween",
       ease: 'easeOut',
       // stiffness: 800,
-      duration: 1.5,
+      duration: 2,
       delay: 3.5,
     }
   },

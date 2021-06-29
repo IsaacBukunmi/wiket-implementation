@@ -32,13 +32,13 @@
             display:none;
           }
           li{
-            font-family: $font-secondary;
+            font-family: $font-navigation;
             padding-right:50px;
             transition: 800ms;
             @media (max-width:$break-point-xl) {
               padding-right:20px;
             }
-            font-size:17px;
+            font-size:16px;
             color:$green;
             font-weight: 700;
             cursor:pointer;

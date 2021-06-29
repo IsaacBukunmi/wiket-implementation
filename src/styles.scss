@@ -10,6 +10,11 @@
   src: local('SpoofTrial'), url('./assets/fonts/SpoofTrial/SpoofTrial-Regular.otf') format('opentype');
 }
 
+@font-face {
+  font-family: 'Cera Pro';
+  src: local('Cera Pro'), url('./assets/fonts/CeraProSv/CeraPro-Bold.otf') format('opentype');
+}
+
 // @font-face {
 //   font-family: 'SpoofTrial';
 //   src: local('SpoofTrial'), url('./assets/fonts/SpoofTrial/SpoofTrial-Regular.otf') format('truetype');
