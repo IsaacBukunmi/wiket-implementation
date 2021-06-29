@@ -32,6 +32,7 @@
             display:none;
           }
           li{
+            font-family: $font-secondary;
             padding-right:50px;
             transition: 800ms;
             @media (max-width:$break-point-xl) {

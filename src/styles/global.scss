@@ -1,18 +1,9 @@
 
 
-@font-face {
-  font-family: 'Faible';
-  src: local('Faible'), url('../assets/fonts/Faible/Faible-Regular.otf') format('truetype');
-}
-
-@font-face {
-  font-family: 'SpoofTrial';
-  src: local('SpoofTrial'), url('../assets/fonts/SpoofTrial/SpoofTrial-Regular.otf') format('truetype');
-}
 
 /* === Variables === **/
-$font-primary: 'SpoofTrial';
-
+$font-primary: 'Faible';
+$font-secondary: 'SpoofTrial';
 $break-point-xs: 420px;
 $break-point-s: 576px;
 $break-point-md: 782px;

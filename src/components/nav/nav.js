@@ -1,7 +1,22 @@
 import React, {useEffect} from "react";
+import {motion} from "framer-motion";
 import styles from "./nav.module.scss";
 import wiket_logo from "../../assets/images/wiket-logo.svg";
 import './nav-scroll.css';
+
+
+const navVariants = {
+  initial: { opacity:0 },
+  animate: { opacity:1 ,
+    transition: {
+      type: "tween",
+      ease: 'easeOut',
+      // stiffness: 800,
+      duration: 1.5,
+      delay: 3.5,
+    }
+  },
+}
 
 const Nav = () => {
 
@@ -21,7 +36,11 @@ const Nav = () => {
     }, [])
 
   return (
-    <div className={styles._}>
+    <motion.div 
+      className={styles._} 
+      variants={navVariants}
+      initial="initial"
+      animate="animate">
       <nav className="nav">
         <div className={styles.nav_container}>
           <div className={styles.logo}>
@@ -43,7 +62,7 @@ const Nav = () => {
           </div>
         </div>
       </nav>
-    </div>
+    </motion.div>
   );
 };
 

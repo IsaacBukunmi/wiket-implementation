@@ -16,17 +16,84 @@ const ContainerVariants = {
 };
 
 const floristVariants = {
-  initial: { y: 1000, opacity:0 },
-  animate: { y: 0, opacity:1 },
-  transition: {
-    type: "tween",
-    ease: 'easeInOut',
-    stiffness: 100,
-    duration: 4,
-    delay: 2,
-
-  }
+  initial: { y: 50, opacity:0 },
+  animate: { y: 0, opacity:1,
+    transition: {
+      type: "tween",
+      ease: 'easeOut',
+      stiffness: 800,
+      duration: 2,
+      delay: .5,
+    }
+  },
 };
+
+const greenThumbVariants = {
+  initial: { y: 20, opacity:0 },
+  animate: { y: 0, opacity:1,
+    transition: {
+      type: "tween",
+      ease: 'easeOut',
+      stiffness: 800,
+      duration: .6,
+      delay: 1.8,
+    }
+  },
+}
+
+const potterVariants = {
+  initial: { y: 20, opacity:0 },
+  animate: { y: 0, opacity:1,
+    transition: {
+      type: "tween",
+      ease: 'easeOut',
+      stiffness: 800,
+      duration: .6,
+      delay: 1.5,
+    }
+  },
+}
+
+const baristaVariants = {
+  initial: { y: 60, opacity:0 },
+  animate: { y: 0, opacity:1,
+    transition: {
+      type: "tween",
+      ease: 'easeOut',
+      stiffness: 800,
+      duration: .6,
+      delay: 2.0,
+    }
+  },
+}
+
+
+const heroTextVariants = {
+  initial: { opacity:0 },
+  animate: { opacity:1 ,
+    transition: {
+      type: "tween",
+      ease: 'easeOut',
+      // stiffness: 800,
+      duration: 1.5,
+      delay: 3,
+    }
+  },
+};
+
+const subHeroTextAndIconsVariants = {
+  initial: { opacity:0 },
+  animate: { opacity:1 ,
+    transition: {
+      type: "tween",
+      ease: 'easeOut',
+      // stiffness: 800,
+      duration: 1.5,
+      delay: 3.5,
+    }
+  },
+};
+
 const Contents = () => {
   return (
     <motion.div className={styles._}
@@ -38,7 +105,7 @@ const Contents = () => {
       <div className={styles.container}>
         <div className={styles.wiket_images_container}>
           {/* SVG Icons */}
-          <div className={styles.svg_icons}>
+          <motion.div className={styles.svg_icons} variants={subHeroTextAndIconsVariants}>
             <div className={styles.location_svg}>
               <img src={location_icon} alt="location icon" />
             </div>
@@ -51,7 +118,7 @@ const Contents = () => {
              <div className={styles.mobile_path_svg}>
               <img src={mobile_path_icon} alt="location icon" />
             </div>
-          </div>
+          </motion.div>
           <motion.div className={styles.wiket_florist} variants={floristVariants}>
             <div className={styles.florist_image}>
               <img src={florist} alt="a florist" />
@@ -61,8 +128,8 @@ const Contents = () => {
               <p>Florist in Bangkok</p>
             </div>
           </motion.div>
-          <div className={styles.mini_card_container}>
-            <div className={styles.mini_card_item}>
+          <motion.div className={styles.mini_card_container}>
+            <motion.div className={styles.mini_card_item} variants={greenThumbVariants}>
               <div className={styles.card_image}>
                 <img src={gardener} alt="a gardener" />
               </div>
@@ -70,8 +137,8 @@ const Contents = () => {
                 <p>GreenThumb</p>
                 <p>Gardener in CheChe</p>
               </div>
-            </div>
-            <div className={styles.mini_card_item}>
+            </motion.div>
+            <motion.div className={styles.mini_card_item} variants={potterVariants}>
               <div className={styles.card_image}>
                 <img src={potter} alt="a potter" />
               </div>
@@ -79,8 +146,8 @@ const Contents = () => {
                 <p>Potject</p>
                 <p>Pottery in Bangkok</p>
               </div>
-            </div>
-            <div className={styles.mini_card_item}>
+            </motion.div>
+            <motion.div className={styles.mini_card_item} variants={baristaVariants}>
               <div className={styles.card_image}>
                 <img src={barista} alt="a barista" />
               </div>
@@ -88,22 +155,22 @@ const Contents = () => {
                 <p>Green Cafe</p>
                 <p>Cafe in Bangkok</p>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
         <div className={styles.wiket_text_contents}>
-          <div className={styles.hero_text}>
+          <motion.div className={styles.hero_text}  variants={heroTextVariants}>
             <p>Explore new opportunities.</p>
             <h1>
               <span>Grow</span> your business.
             </h1>
-          </div>
-          <div className={styles.sub_hero_text}>
+          </motion.div>
+          <motion.div className={styles.sub_hero_text} variants={subHeroTextAndIconsVariants}>
             <p>
               <strong>Wiket is the first business to business network</strong>{" "}
               which lets you connect to mind like people.
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
     </motion.div>
