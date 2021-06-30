@@ -65,7 +65,7 @@ const potterVariants = {
     }
   },
   animationTwo: {
-    y:5,
+    y:8,
     opacity:1,
     transition:{
       y:{
