@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {motion, useCycle} from "framer-motion";
 import styles from "./contents.module.scss";
 import florist from "../../assets/images/header-img-florist.jpg";
@@ -15,6 +15,8 @@ const ContainerVariants = {
   animate: {}
 };
 
+
+// Desktop View Animation
 const floristVariants = {
   initial: { y: 80, opacity:0 },
   animate: { y: 0, opacity:1,
@@ -27,8 +29,6 @@ const floristVariants = {
     }
   },
 };
-
-
 
 const greenThumbVariants = {
   animationOne: { 
@@ -113,19 +113,6 @@ const baristaVariants = {
   }
 }
 
-// const baristaVariants = {
-//   initial: { y: 60, opacity:0 },
-//   animate: { y: 0, opacity:1,
-//     transition: {
-//       ease: 'easeOut',
-//       stiffness: 800,
-//       duration: .6,
-//       delay: 2.0,
-//     }
-//   },
-// }
-
-
 const heroTextVariants = {
   initial: { opacity:0 },
   animate: { opacity:1 ,
@@ -169,12 +156,51 @@ animate:{
   }
 }
 
+// Mobile View Animation
+const mobileTextContentVariants = {
+  initial: { y: 80, opacity:0 },
+  animate: { y: 0, opacity:1,
+    transition: {
+      type: "tween",
+      ease: 'easeIn',
+      stiffness: 800,
+      duration: .8,
+      delay: .5,
+    }
+  },
+};
+
+const mobileFloristVariants = {
+  initial: { y: 80, opacity:0 },
+  animate: { y: 0, opacity:1,
+    transition: {
+      type: "tween",
+      ease: 'easeIn',
+      stiffness: 800,
+      duration: .8,
+      delay: 1.5,
+    }
+  },
+};
+
 const Contents = () => {
   const [animation, cycleAnimation] = useCycle("animationOne", "animationTwo");
+  const [width, setWidth] = useState(window.innerWidth);
+  console.log(width)
+
+  const checkWidth = () => {
+    setWidth(width)
+  }
+
   useEffect(() => {
+    window.addEventListener('resize', checkWidth)
     setTimeout(() => {
       cycleAnimation();
     }, 3500);
+    return () => {
+      console.log('cleanup');
+      window.removeEventListener('resize', checkWidth)
+    }
   }, []);
 
   return (
@@ -201,7 +227,8 @@ const Contents = () => {
               <img src={mobile_path_icon} alt="location icon" />
             </div>
           </motion.div>
-          <motion.div className={styles.wiket_florist} variants={floristVariants}>
+          <motion.div className={styles.wiket_florist} 
+                      variants={width <= 992 ? mobileFloristVariants:floristVariants}>
             <div className={styles.florist_image}>
               <img src={florist} alt="a florist" />
             </div>
@@ -233,7 +260,9 @@ const Contents = () => {
                 <p>Pottery in Bangkok</p>
               </div>
             </motion.div>
-            <motion.div className={styles.mini_card_item} variants={baristaVariants} animate={animation}>
+            <motion.div className={styles.mini_card_item} 
+                        variants={baristaVariants} 
+                        animate={animation}>
               <div className={styles.card_image}>
                 <img src={barista} alt="a barista" />
               </div>
@@ -244,20 +273,21 @@ const Contents = () => {
             </motion.div>
           </motion.div>
         </div>
-        <div className={styles.wiket_text_contents}>
-          <motion.div className={styles.hero_text}  variants={heroTextVariants}>
+        <motion.div className={styles.wiket_text_contents}  
+                    variants={width <= 992 ? mobileTextContentVariants : null}>
+          <motion.div className={styles.hero_text}  variants={width <= 992 ? null:heroTextVariants}>
             <p>Explore new opportunities.</p>
             <h1>
               <span>Grow</span> your business.
             </h1>
           </motion.div>
-          <motion.div className={styles.sub_hero_text} variants={subHeroTextAndIconsVariants}>
+          <motion.div className={styles.sub_hero_text} variants={width <= 992 ? null:heroTextVariants}>
             <p>
               <strong>Wiket is the first business to business network</strong>{" "}
               which lets you connect to mind like people.
             </p>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </motion.div>
   );

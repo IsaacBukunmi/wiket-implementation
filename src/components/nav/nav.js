@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {motion} from "framer-motion";
 import styles from "./nav.module.scss";
 import wiket_logo from "../../assets/images/wiket-logo.svg";
@@ -20,6 +20,21 @@ const navVariants = {
 
 const Nav = () => {
 
+  const [width, setWidth] = useState(window.innerWidth);
+  console.log(width)
+
+  const checkWidth = () => {
+    setWidth(width)
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', checkWidth)
+    return () => {
+      console.log('cleanup');
+      window.removeEventListener('resize', checkWidth)
+    }
+  }, []);
+
   const handleScroll = () => {
         if(window.scrollY > 60){
             document.querySelector('.nav').className ='nav scroll';
@@ -38,7 +53,7 @@ const Nav = () => {
   return (
     <motion.div 
       className={styles._} 
-      variants={navVariants}
+      variants={width <= 992 ? null : navVariants}
       initial="initial"
       animate="animate">
       <nav className="nav">
