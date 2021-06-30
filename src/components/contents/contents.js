@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {motion, useCycle} from "framer-motion";
+import {motion, useCycle, useAnimation} from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import styles from "./contents.module.scss";
 import florist from "../../assets/images/header-img-florist.jpg";
 import gardener from "../../assets/images/header-img-gardener.jpg";
@@ -77,18 +78,6 @@ const potterVariants = {
   }
 }
 
-// const potterVariants = {
-//   initial: { y: 20, opacity:0 },
-//   animate: { y: 0, opacity:1,
-//     transition: {
-//       ease: 'easeOut',
-//       stiffness: 800,
-//       duration: .6,
-//       delay: 1.5,
-//     }
-//   },
-// }
-
 const baristaVariants = {
   animationOne: { 
     y:[60, 0], 
@@ -162,26 +151,48 @@ const mobileTextContentVariants = {
   animate: { y: 0, opacity:1,
     transition: {
       type: "tween",
-      ease: 'easeIn',
+      ease: 'easeOut',
       stiffness: 800,
       duration: .8,
       delay: .5,
+      staggerChildren:1
     }
   },
 };
+
+const mobileHeroTextVariants = {
+  initial: { y: 80, opacity:0 },
+  animate: { y: 0, opacity:1}
+}
+const mobileSubHeroTextVariants = {
+  initial: { y: 80, opacity:0 },
+  animate: { y: 0, opacity:1}
+}
 
 const mobileFloristVariants = {
   initial: { y: 80, opacity:0 },
   animate: { y: 0, opacity:1,
     transition: {
       type: "tween",
-      ease: 'easeIn',
+      ease: 'easeOut',
       stiffness: 800,
       duration: .8,
       delay: 1.5,
     }
   },
 };
+
+// const mobileMiniCardsVariants = {
+//   initial: { y: 80, opacity:0 },
+//   animate: { y: 0, opacity:1,
+//     transition: {
+//       type: "tween",
+//       ease: 'easeIn',
+//       stiffness: 800,
+//       duration: .8,
+//     }
+//   },
+// }
 
 const Contents = () => {
   const [animation, cycleAnimation] = useCycle("animationOne", "animationTwo");
@@ -192,16 +203,21 @@ const Contents = () => {
     setWidth(width)
   }
 
+  const controls = useAnimation();
+  const [ref, inView] = useInView();
+
   useEffect(() => {
     window.addEventListener('resize', checkWidth)
     setTimeout(() => {
       cycleAnimation();
     }, 3500);
+    if (inView) {
+      controls.start("animate");
+    }
     return () => {
-      console.log('cleanup');
       window.removeEventListener('resize', checkWidth)
     }
-  }, []);
+  }, [controls, inView]);
 
   return (
     <motion.div className={styles._}
@@ -240,7 +256,8 @@ const Contents = () => {
           <motion.div className={styles.mini_card_container}>
             <motion.div className={styles.mini_card_item} 
                         variants={greenThumbVariants}
-                        animate={animation}>
+                        animate={animation}
+                        >
               <div className={styles.card_image}>
                 <img src={gardener} alt="a gardener" />
               </div>
@@ -275,13 +292,15 @@ const Contents = () => {
         </div>
         <motion.div className={styles.wiket_text_contents}  
                     variants={width <= 992 ? mobileTextContentVariants : null}>
-          <motion.div className={styles.hero_text}  variants={width <= 992 ? null:heroTextVariants}>
+          <motion.div className={styles.hero_text}  
+                      variants={width <= 992 ? mobileHeroTextVariants:heroTextVariants}>
             <p>Explore new opportunities.</p>
             <h1>
               <span>Grow</span> your business.
             </h1>
           </motion.div>
-          <motion.div className={styles.sub_hero_text} variants={width <= 992 ? null:heroTextVariants}>
+          <motion.div className={styles.sub_hero_text} 
+                      variants={width <= 992 ? mobileSubHeroTextVariants : heroTextVariants}>
             <p>
               <strong>Wiket is the first business to business network</strong>{" "}
               which lets you connect to mind like people.
