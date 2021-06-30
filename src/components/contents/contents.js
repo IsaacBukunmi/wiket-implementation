@@ -1,5 +1,5 @@
-import React from "react";
-import {motion} from "framer-motion";
+import React, {useEffect} from "react";
+import {motion, useCycle} from "framer-motion";
 import styles from "./contents.module.scss";
 import florist from "../../assets/images/header-img-florist.jpg";
 import gardener from "../../assets/images/header-img-gardener.jpg";
@@ -28,44 +28,102 @@ const floristVariants = {
   },
 };
 
+
+
 const greenThumbVariants = {
-  initial: { y: 20, opacity:0 },
-  animate: { y: 0, opacity:1,
-    transition: {
-      type: "tween",
+  animationOne: { 
+    y:[0, -20], 
+    opacity:[0,1],
+    transition:{
       ease: 'easeOut',
       stiffness: 800,
       duration: .6,
       delay: 1.8,
     }
   },
+  animationTwo: {
+    y:-10,
+    opacity:1,
+    transition:{
+      yoyo:Infinity,
+      duration:4,
+      ease:'easeInOut',
+    }
+  }
 }
 
+
 const potterVariants = {
-  initial: { y: 20, opacity:0 },
-  animate: { y: 0, opacity:1,
-    transition: {
-      type: "tween",
+  animationOne: { 
+    y:[20, 0], 
+    opacity:[0,1],
+    transition:{
       ease: 'easeOut',
       stiffness: 800,
       duration: .6,
       delay: 1.5,
     }
   },
+  animationTwo: {
+    y:5,
+    opacity:1,
+    transition:{
+      y:{
+        yoyo:Infinity,
+        duration:6,
+        ease:'easeInOut',
+      }
+    }
+  }
 }
 
+// const potterVariants = {
+//   initial: { y: 20, opacity:0 },
+//   animate: { y: 0, opacity:1,
+//     transition: {
+//       ease: 'easeOut',
+//       stiffness: 800,
+//       duration: .6,
+//       delay: 1.5,
+//     }
+//   },
+// }
+
 const baristaVariants = {
-  initial: { y: 60, opacity:0 },
-  animate: { y: 0, opacity:1,
-    transition: {
-      type: "tween",
+  animationOne: { 
+    y:[60, 0], 
+    opacity:[0,1],
+    transition:{
       ease: 'easeOut',
       stiffness: 800,
       duration: .6,
-      delay: 2.0,
+      delay: 1.5,
     }
   },
+  animationTwo: {
+    y:-20,
+    opacity:1,
+    transition:{
+      y:{
+        yoyo:Infinity,
+        duration:7,
+        ease:'easeInOut',
+      }
+    }
+  }
 }
+
+// const baristaVariants = {
+//   initial: { y: 60, opacity:0 },
+//   animate: { y: 0, opacity:1,
+//     transition: {
+//       ease: 'easeOut',
+//       stiffness: 800,
+//       duration: .6,
+//       delay: 2.0,
+//     }
+//   },
+// }
 
 
 const heroTextVariants = {
@@ -74,7 +132,6 @@ const heroTextVariants = {
     transition: {
       type: "tween",
       ease: 'easeOut',
-      // stiffness: 800,
       duration: 1.5,
       delay: 3,
     }
@@ -87,14 +144,39 @@ const subHeroTextAndIconsVariants = {
     transition: {
       type: "tween",
       ease: 'easeOut',
-      // stiffness: 800,
       duration: 2,
       delay: 3.5,
     }
   },
 };
 
+const svgPinVariants = {
+initial:{y:-12, opacity:0 },
+animate:{
+    y:0,
+    opacity:1,
+    transition:{
+        type:'spring',
+        stiffness:120,
+        delay:3.5,
+        duration:5,
+         y: {
+            yoyo:Infinity,
+            duration:5,
+            ease:'easeInOut',
+         }
+    }
+  }
+}
+
 const Contents = () => {
+  const [animation, cycleAnimation] = useCycle("animationOne", "animationTwo");
+  useEffect(() => {
+    setTimeout(() => {
+      cycleAnimation();
+    }, 3500);
+  }, []);
+
   return (
     <motion.div className={styles._}
       variants={ContainerVariants}
@@ -106,12 +188,12 @@ const Contents = () => {
         <div className={styles.wiket_images_container}>
           {/* SVG Icons */}
           <motion.div className={styles.svg_icons} variants={subHeroTextAndIconsVariants}>
-            <div className={styles.location_svg}>
+            <motion.div className={styles.location_svg} variants={svgPinVariants}>
               <img src={location_icon} alt="location icon" />
-            </div>
-            <div className={styles.pin_svg}>
+            </motion.div>
+            <motion.div className={styles.pin_svg} variants={svgPinVariants}>
               <img src={pin_icon} alt="pin icon" />
-            </div>
+            </motion.div>
             <div className={styles.desktop_path_svg}>
               <img src={desktop_path_icon} alt="location icon" />
             </div>
@@ -129,7 +211,9 @@ const Contents = () => {
             </div>
           </motion.div>
           <motion.div className={styles.mini_card_container}>
-            <motion.div className={styles.mini_card_item} variants={greenThumbVariants}>
+            <motion.div className={styles.mini_card_item} 
+                        variants={greenThumbVariants}
+                        animate={animation}>
               <div className={styles.card_image}>
                 <img src={gardener} alt="a gardener" />
               </div>
@@ -138,7 +222,9 @@ const Contents = () => {
                 <p>Gardener in CheChe</p>
               </div>
             </motion.div>
-            <motion.div className={styles.mini_card_item} variants={potterVariants}>
+            <motion.div className={styles.mini_card_item} 
+                        variants={potterVariants} 
+                        animate={animation}>
               <div className={styles.card_image}>
                 <img src={potter} alt="a potter" />
               </div>
@@ -147,7 +233,7 @@ const Contents = () => {
                 <p>Pottery in Bangkok</p>
               </div>
             </motion.div>
-            <motion.div className={styles.mini_card_item} variants={baristaVariants}>
+            <motion.div className={styles.mini_card_item} variants={baristaVariants} animate={animation}>
               <div className={styles.card_image}>
                 <img src={barista} alt="a barista" />
               </div>
