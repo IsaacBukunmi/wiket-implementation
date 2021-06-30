@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {motion, useCycle, useAnimation} from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import styles from "./contents.module.scss";
 import florist from "../../assets/images/header-img-florist.jpg";
 import gardener from "../../assets/images/header-img-gardener.jpg";
@@ -80,13 +79,13 @@ const potterVariants = {
 
 const baristaVariants = {
   animationOne: { 
-    y:[60, 0], 
+    y:[70, 0], 
     opacity:[0,1],
     transition:{
       ease: 'easeOut',
       stiffness: 800,
       duration: .6,
-      delay: 1.5,
+      delay: 2,
     }
   },
   animationTwo: {
@@ -182,42 +181,30 @@ const mobileFloristVariants = {
   },
 };
 
-// const mobileMiniCardsVariants = {
-//   initial: { y: 80, opacity:0 },
-//   animate: { y: 0, opacity:1,
-//     transition: {
-//       type: "tween",
-//       ease: 'easeIn',
-//       stiffness: 800,
-//       duration: .8,
-//     }
-//   },
-// }
+
 
 const Contents = () => {
   const [animation, cycleAnimation] = useCycle("animationOne", "animationTwo");
   const [width, setWidth] = useState(window.innerWidth);
-  console.log(width)
 
   const checkWidth = () => {
     setWidth(width)
   }
 
-  const controls = useAnimation();
-  const [ref, inView] = useInView();
-
   useEffect(() => {
+    // Check for screen width
     window.addEventListener('resize', checkWidth)
+    
+    // Switch animations after 2secs
     setTimeout(() => {
       cycleAnimation();
     }, 3500);
-    if (inView) {
-      controls.start("animate");
-    }
+
+    // Clean up
     return () => {
       window.removeEventListener('resize', checkWidth)
     }
-  }, [controls, inView]);
+  }, []);
 
   return (
     <motion.div className={styles._}
@@ -253,7 +240,7 @@ const Contents = () => {
               <p>Florist in Bangkok</p>
             </div>
           </motion.div>
-          <motion.div className={styles.mini_card_container}>
+          <motion.div className={styles.mini_card_container}> 
             <motion.div className={styles.mini_card_item} 
                         variants={greenThumbVariants}
                         animate={animation}
