@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {motion, useCycle, useAnimation} from "framer-motion";
+import {motion, useCycle} from "framer-motion";
 import styles from "./contents.module.scss";
 import florist from "../../assets/images/header-img-florist.jpg";
 import gardener from "../../assets/images/header-img-gardener.jpg";
@@ -33,7 +33,7 @@ const floristVariants = {
 const greenThumbVariants = {
   animationOne: { 
     y:[0, -20], 
-    opacity:[0,1],
+    opacity:[0, 1],
     transition:{
       ease: 'easeOut',
       stiffness: 800,
@@ -56,7 +56,7 @@ const greenThumbVariants = {
 const potterVariants = {
   animationOne: { 
     y:[20, 0], 
-    opacity:[0,1],
+    opacity:[0, 1],
     transition:{
       ease: 'easeOut',
       stiffness: 800,
