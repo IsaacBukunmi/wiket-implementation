@@ -1,2 +1,3 @@
 # wiket-implementation
-Created with CodeSandbox
+Landing page built with react and framer motion
+
